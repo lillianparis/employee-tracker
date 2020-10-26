@@ -20,4 +20,4 @@ connection.connect(function(err) {
   connection.end();
 });
 
-// installed npm install, npm init -y and npm install mysql
+// installed npm install, npm init -y and npm install mysql (10/25/2020)
