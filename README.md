@@ -1,2 +1,2 @@
 # employee-tracker
-MySQL
+This webage is built upon several interfaces making it easy for non-developers to view and interact with information stored in databases. This design ustilizes node, inquirer and MySQL as the foundation for functionality. This command line application allows its users to add departments, roles and employees. The user can view departments, roles and employees and update employee roles. 
