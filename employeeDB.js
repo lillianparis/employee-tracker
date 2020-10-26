@@ -44,3 +44,6 @@ function start () {
         }
     })
 }
+
+// Referencing 12, activity 10-greatBayBasic
+// Must connect to mysql
