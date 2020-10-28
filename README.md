@@ -33,7 +33,7 @@ npm install
 ```
 
 ## Usage
-This webpage offers ease of use for organizing employees.
+This webpage oofers a simple way to organize an employeers employees. This command- line application is simple and straighforward. 
 
 ## Contribution
 This webpage was developed by: Lillian Paris
