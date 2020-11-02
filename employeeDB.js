@@ -16,7 +16,7 @@ var connection = mysql.createConnection({
 
 // connects to mysql server and sql database
 
-connection.connect(function(err) {
+connection.connect(function (err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId);
   connection.end();
@@ -28,22 +28,49 @@ connection.connect(function(err) {
 //   * Update employee roles 
 
 // Creating a function prompting the user what action they should take...
-function start () {
-    inquirer 
+// Referencing 12, activity 10-greatBayBasic
+function start() {
+  inquirer
     .prompt({
-        name: "actionrequired",
-        type: "Question",
-        message: "What would you like to do?",
-        choices: ["View All Employees", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee", "Update Employee Role", "Update Employee Manager"],
-        default: "Use arrow keys"
+      name: "actionrequired",
+      type: "Question",
+      message: "What would you like to do?",
+      choices: ["View All Employees", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee", "Update Employee Role", "Update Employee Manager"],
+      default: "Use arrow keys"
     })
     // Based on the users answer, they will be prompted with their response.
-    .then(function(answer) {
-        if (answer.viewAllEmployees === "View All Employees"){
+    // Referencing activity 13
+    .then(function (answer) {
+      switch (answer.action) {
+        case "View All Employees":
+          viewEmployee();
+          break;
 
-        }
-    })
+        case "View All Employees by Department":
+          viewDepartment();
+          break;
+
+        case "View All Employees by Manager":
+          viewManager();
+          break;
+
+        case "Add Employee":
+          addEmployee();
+          break;
+
+        case "Remove Employee":
+          removeEmployee();
+          break;
+
+        case "Update Employee Role":
+          updateEmployee();
+          break;
+
+        case "Update Employee Manager":
+          updateManager();
+          break;
+      }
+    });
 }
 
-// Referencing 12, activity 10-greatBayBasic
 // Must connect to mysql
