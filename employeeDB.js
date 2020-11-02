@@ -72,5 +72,16 @@ function start() {
       }
     });
 }
+function viewEmployee() {
+  inquirer 
+  .prompt ({
+    name: "view",
+    type: "input",
+    message: "Which employee would you like to view?"
+  })
+  .then(function(answer){
+    const query = "SELECT employee";
+    
+  })
+}
 
-// Must connect to mysql
