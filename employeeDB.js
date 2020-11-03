@@ -81,8 +81,7 @@ function viewEmployee() {
   })
   .then(function(answer){
     const query = "SELECT employee";
-    connection.query(query { employee: answer.employee }, function(err, res)
-    for 
+    connection.query(query { employee: answer.employee }, function(err, res) {}
   }))
 }
 
