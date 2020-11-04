@@ -127,48 +127,48 @@ function addEmployee() {
 function addDepartment() {
   inquirer
     .prompt([
-        {
-          name: "input",
-          type: "input",
-          message: "What is the department name you would like to add?"
-        },
-      ]
+      {
+        name: "input",
+        type: "input",
+        message: "What is the department name you would like to add?"
+      },
+    ]
     )
-  .then(function (answer) {
-    conecction.query("INSERT INTO department SET ?", [answer], function (err) {
-      if (err) throw (err);
-      console.log("Its been added!")
-      start();
+    .then(function (answer) {
+      conecction.query("INSERT INTO department SET ?", [answer], function (err) {
+        if (err) throw (err);
+        console.log("Its been added!")
+        start();
+      });
     });
-  });
 }
 
 function addRole() {
   inquirer
-  .prompt([
-    {
-      name: "role",
-      type: "input",
-      message: "What is the role title"
-    },
-    {
-      name: "money",
-      type: "salary",
-      message: "What is the salary for this role?"
-    },
-    {
-      name: "department",
-      type: "id",
-      message: "What is the department ID for this role?"
-    },
-  ])
-  .then(function (answer) {
-    conecction.query("INSERT INTO SET ?, [answer", function (err) {
-      if (err) throw (err);
-      console.log("Complete!");
-      start();
+    .prompt([
+      {
+        name: "role",
+        type: "input",
+        message: "What is the role title"
+      },
+      {
+        name: "money",
+        type: "salary",
+        message: "What is the salary for this role?"
+      },
+      {
+        name: "department",
+        type: "id",
+        message: "What is the department ID for this role?"
+      },
+    ])
+    .then(function (answer) {
+      conecction.query("INSERT INTO SET ?, [answer", function (err) {
+        if (err) throw (err);
+        console.log("Complete!");
+        start();
+      })
     })
-  })
 }
 
 // View department, employee and role
@@ -186,8 +186,8 @@ function updateEmployee() {
       return (
         // Comes from employeetrack.sql
         {
-        name: element.first_name + element.last_name,
-        value: element.id
+          name: element.first_name + element.last_name,
+          value: element.id
         }
       )
     })
@@ -219,27 +219,27 @@ function updateEmployee() {
       ]).then(answers => {
         console.log(answers)
         conecction.query("UPDATE employee SET role_id = ? WHERE id = ?", [answers.employee, answers.role],
-        function (err, res) {
-          if (err) throw (err);
-          console.log(res.affectedRows + "Your employee has been updated!\n");
-          start();
-        });
+          function (err, res) {
+            if (err) throw (err);
+            console.log(res.affectedRows + "Your employee has been updated!\n");
+            start();
+          });
       });
     })
   })
 }
 
 // Begin deletion of roles, employees and departments
- function removeEmployee() {
-   inquirer.prompt([
-     {
-       type: "input",
-       name: "role",
-       message: "Please enter employee role ID"
-     }
-   ]).then(answers => {
-     connection.query("DELETE FROM WHERE ?", {
-       id: answers.id
-     })
-   })
- }
+function removeEmployee() {
+  inquirer.prompt([
+    {
+      type: "input",
+      name: "role",
+      message: "Please enter employee role ID"
+    }
+  ]).then(answers => {
+    connection.query("DELETE FROM WHERE ?", {
+      id: answers.id
+    })
+  })
+}
