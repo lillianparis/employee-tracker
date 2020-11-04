@@ -221,7 +221,7 @@ function updateEmployee() {
         conecction.query("UPDATE employee SET role_id = ? WHERE id = ?", [answers.employee, answers.role],
         function (err, res) {
           if (err) throw (err);
-          console.log(res.affectedRows + "Employee has been updated!\n");
+          console.log(res.affectedRows + "Your employee has been updated!\n");
           start();
         });
       });
@@ -230,3 +230,16 @@ function updateEmployee() {
 }
 
 // Begin deletion of roles, employees and departments
+ function removeEmployee() {
+   inquirer.prompt([
+     {
+       type: "input",
+       name: "role",
+       message: "Please enter employee role ID"
+     }
+   ]).then(answers => {
+     connection.query("DELETE FROM WHERE ?", {
+       id: answers.id
+     })
+   })
+ }
