@@ -19,10 +19,10 @@
 --   * **manager_id** - INT to hold reference to another employee that manages the employee being Created. This field may be null if the employee has no manager
 
 
-DROP DATABASE IF EXISTS employeeDB
-CREATE DATABASE employeeDB;
+DROP DATABASE IF EXISTS employee_DB;
+CREATE DATABASE employee_DB;
 
-USE employeeDB;
+USE employee__DB;
 
 CREATE TABLE department(
   id INT PRIMARY KEY,
