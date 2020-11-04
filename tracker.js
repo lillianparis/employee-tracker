@@ -35,7 +35,7 @@ function start() {
       name: "actionrequired",
       type: "Question",
       message: "What would you like to do?",
-      choices: ["View All Employees", "View All Employees by Department", "View All Employees by Role", "Add Employee", "Add Role", "Add Department", "Remove Employee", "Remove Role", "Remove Department",  "Update Employee Role", "EXIT"],
+      choices: ["View All Employees", "View All Employees by Department", "View All Employees by Role", "Add Employee", "Add Role", "Add Department", "Remove Employee", "Remove Role", "Remove Department", "Update Employee Role", "EXIT"],
       default: "Use arrow keys"
     })
     // Based on the users answer, they will be prompted with their response.
@@ -58,43 +58,116 @@ function start() {
           addEmployee();
           break;
 
-          case "Add Role":
-            addRole();
-            break;
+        case "Add Role":
+          addRole();
+          break;
 
-            case "Add Department":
-              addDepartment();
-              break;
+        case "Add Department":
+          addDepartment();
+          break;
 
         case "Remove Employee":
           removeEmployee();
           break;
 
-          case "Remove Role":
-            removeRole();
-            break;
+        case "Remove Role":
+          removeRole();
+          break;
 
-            case "Remove Department":
-              removeDepartment();
-              break;
+        case "Remove Department":
+          removeDepartment();
+          break;
 
         case "Update Employee Role":
           updateEmployee();
           break;
 
-          case "Exit":
-            exitList();
-            break;
+        case "Exit":
+          exitList();
+          break;
       }
     });
 }
-function viewEmployee() {
-  inquirer 
-  .prompt ({
-    name: "view",
-    type: "input",
-    message: "Which employee would you like to view?"
-  })
-  .then(function (answers) {
+// Add employee function
+function addEmployee() {
+  inquirer
+    .prompt([
+      // The user is prompted with questions that will be displayed in the view portion of the program.
+      {
+        name: "employee's name",
+        type: "input",
+        message: "What is the employee's fist name",
+      },
+      {
+        name: "employee's last name",
+        type: "input",
+        message: "What is the employee's last name?"
+      },
+      {
+        name: "employee role",
+        type: "role",
+        message: "What is the employee's role"
+      },
+      {
+        message: "manager information",
+        type: "number",
+        message: "What is the employee's manager Id"
+      },
+    ])
+    // Adds to mysql by placing the information into a table with rows and columns
+    .then(function (answer) {
+      conecction.query("INSERT INTO employee SET ?", [answer], function (err) {
+        if (err) throw (err);
+        console.log("Complete!");
+        start();
+      })
+    })
+}
+// One question is provided for the add department function
+function addDepartment() {
+  inquirer
+    .prompt{
+      [
+        {
+          name: "input",
+          type: "input",
+          message: "What is the department name you would like to add?"
+        },
+      ]
+  }
+  .then(function (answer) {
+    conecction.query("INSERT INTO department SET ?", [answer], function (err) {
+      if (err) throw (err);
+      console.log("Its been added!")
+      start();
+    });
+  });
+}
 
+function addRole() {
+  inquirer
+  .prompt([
+    {
+      name: "role",
+      type: "input",
+      message: "What is the role title"
+    },
+    {
+      name: "money",
+      type: "salary",
+      message: "What is the salary for this role?"
+    },
+    {
+      name: "department",
+      type: "id",
+      message: "What is the department ID for this role?"
+    },
+  ])
+  .then(function (answer) {
+    conecction.query("INSERT INTO SET ?, [answer", function (err) {
+      if (err) throw (err);
+      console.log("Complete!");
+      start();
+    })
   })
+}
