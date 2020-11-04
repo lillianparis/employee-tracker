@@ -171,3 +171,59 @@ function addRole() {
     })
   })
 }
+
+// View department, employee and role
+
+function viewEmployee() {
+  conecction.query("SELECT employeerole.title, employeerole.salary, department")
+}
+
+
+// update employee
+function updateEmployee() {
+  conecction.query("SELECT * FROM employee", function (err, res) {
+    console.log(res);
+    const employees = res.map(element => {
+      return (
+        {
+        name: element.first_name + element.last_name,
+        value: element.id
+        }
+      )
+    })
+    console.log(employees);
+    connection.query("SELECT * FROM employee", function (err, res) {
+      console.log(res);
+      let employeeRoles = res.map(element => {
+        return (
+          {
+            name: element.role_id,
+            value: element.id
+          }
+        )
+      })
+      console.log(employeeRroles);
+
+      inquirer.prompt([
+        {
+          type: "list",
+          name: "employee",
+          message: "Which employee would you like to update?"
+        },
+        {
+          type: "list",
+          name: "role",
+          message: "What is the employee's new role?"
+        }
+      ]).then(answers => {
+        console.log(answers)
+        conecction.query("UPDATE employee SET role_id = ? WHERE id = ?", [answers.employee, answers.role],
+        function (err, res) {
+          if (err) throw (err);
+          console.log(res.affectedRows + "Employee has been updated!\n");
+          start();
+        })
+      })
+    })
+  })
+}
