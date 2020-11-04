@@ -35,7 +35,7 @@ function start() {
       name: "actionrequired",
       type: "Question",
       message: "What would you like to do?",
-      choices: ["View All Employees", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee", "Update Employee Role", "Update Employee Manager"],
+      choices: ["View All Employees", "View All Employees by Department", "View All Employees by Role", "Add Employee", "Add Role", "Add Department", "Remove Employee", "Remove Role", "Remove Department",  "Update Employee Role", "EXIT"],
       default: "Use arrow keys"
     })
     // Based on the users answer, they will be prompted with their response.
@@ -50,25 +50,41 @@ function start() {
           viewDepartment();
           break;
 
-        case "View All Employees by Manager":
-          viewManager();
+        case "View All Employees by Role":
+          viewRole();
           break;
 
         case "Add Employee":
           addEmployee();
           break;
 
+          case "Add Role":
+            addRole();
+            break;
+
+            case "Add Department":
+              addDepartment();
+              break;
+
         case "Remove Employee":
           removeEmployee();
           break;
+
+          case "Remove Role":
+            removeRole();
+            break;
+
+            case "Remove Department":
+              removeDepartment();
+              break;
 
         case "Update Employee Role":
           updateEmployee();
           break;
 
-        case "Update Employee Manager":
-          updateManager();
-          break;
+          case "Exit":
+            exitList();
+            break;
       }
     });
 }
@@ -79,9 +95,6 @@ function viewEmployee() {
     type: "input",
     message: "Which employee would you like to view?"
   })
-  .then(function(answer){
-    const query = "SELECT employee";
-    connection.query(query { employee: answer.employee }, function(err, res) {}
-  }))
-}
+  .then(function (answers) {
 
+  })
