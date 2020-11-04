@@ -126,15 +126,14 @@ function addEmployee() {
 // One question is provided for the add department function
 function addDepartment() {
   inquirer
-    .prompt{
-      [
+    .prompt([
         {
           name: "input",
           type: "input",
           message: "What is the department name you would like to add?"
         },
       ]
-  }
+    )
   .then(function (answer) {
     conecction.query("INSERT INTO department SET ?", [answer], function (err) {
       if (err) throw (err);
