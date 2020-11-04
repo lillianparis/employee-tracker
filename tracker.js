@@ -185,6 +185,7 @@ function updateEmployee() {
     console.log(res);
     const employees = res.map(element => {
       return (
+        // Comes from employeetrack.sql
         {
         name: element.first_name + element.last_name,
         value: element.id
@@ -196,6 +197,7 @@ function updateEmployee() {
       console.log(res);
       let employeeRoles = res.map(element => {
         return (
+          // comes from employeetrack.sql
           {
             name: element.role_id,
             value: element.id
@@ -222,8 +224,10 @@ function updateEmployee() {
           if (err) throw (err);
           console.log(res.affectedRows + "Employee has been updated!\n");
           start();
-        })
-      })
+        });
+      });
     })
   })
 }
+
+// Begin deletion of roles, employees and departments
