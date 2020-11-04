@@ -1,5 +1,5 @@
 const mysql = require("mysql");
-
+const inquirer = require("inquirer");
 var connection = mysql.createConnection({
   host: "localhost",
 
@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
 
   // Your password
   password: "rootroot",
-  database: "employee_DB"
+  database: "employee_db"
 });
 
 // connects to mysql server and sql database
@@ -19,7 +19,8 @@ var connection = mysql.createConnection({
 connection.connect(function (err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId);
-  connection.end();
+  start();
+  // connection.end();
 });
 // installed npm install, npm init -y and npm install mysql (10/25/2020)
 // Build a command-line application that at a minimum allows the user to:
@@ -29,11 +30,12 @@ connection.connect(function (err) {
 
 // Creating a function prompting the user what action they should take...
 // Referencing 12, activity 10-greatBayBasic
+// start()
 function start() {
   inquirer
     .prompt({
       name: "actionrequired",
-      type: "Question",
+      type: "list",
       message: "What would you like to do?",
       choices: ["View All Employees", "View All Employees by Department", "View All Employees by Role", "Add Employee", "Add Role", "Add Department", "Remove Employee", "Remove Role", "Remove Department", "Update Employee Role", "EXIT"],
       default: "Use arrow keys"
@@ -41,7 +43,8 @@ function start() {
     // Based on the users answer, they will be prompted with their response.
     // Referencing activity 13
     .then(function (answer) {
-      switch (answer.action) {
+      console.log(answer)
+      switch (answer.actionrequired) {
         case "View All Employees":
           viewEmployee();
           break;
@@ -94,29 +97,30 @@ function addEmployee() {
     .prompt([
       // The user is prompted with questions that will be displayed in the view portion of the program.
       {
-        name: "employee's name",
+        name: "first_name",
         type: "input",
         message: "What is the employee's fist name",
       },
       {
-        name: "employee's last name",
+        name: "last_name",
         type: "input",
         message: "What is the employee's last name?"
       },
       {
-        name: "employee role",
-        type: "role",
+        name: "role_id",
+        type: "input",
         message: "What is the employee's role"
       },
       {
-        message: "manager information",
-        type: "number",
+        name: "manager_id",
+        type: "input",
         message: "What is the employee's manager Id"
       },
     ])
     // Adds to mysql by placing the information into a table with rows and columns
     .then(function (answer) {
-      conecction.query("INSERT INTO employee SET ?", [answer], function (err) {
+      console.log(answer)
+      connection.query("INSERT INTO employee SET ?", [answer], function (err) {
         if (err) throw (err);
         console.log("Complete!");
         start();
@@ -128,16 +132,16 @@ function addDepartment() {
   inquirer
     .prompt([
       {
-        name: "input",
+        name: "name",
         type: "input",
         message: "What is the department name you would like to add?"
       },
     ]
     )
     .then(function (answer) {
-      conecction.query("INSERT INTO department SET ?", [answer], function (err) {
+      connection.query("INSERT INTO department SET ?", [answer], function (err) {
         if (err) throw (err);
-        console.log("Its been added!")
+        console.log("It's been added!")
         start();
       });
     });
@@ -147,23 +151,23 @@ function addRole() {
   inquirer
     .prompt([
       {
-        name: "role",
+        name: "title",
         type: "input",
         message: "What is the role title"
       },
       {
-        name: "money",
-        type: "salary",
+        name: "salary",
+        type: "input",
         message: "What is the salary for this role?"
       },
       {
-        name: "department",
-        type: "id",
+        name: "department_id",
+        type: "input",
         message: "What is the department ID for this role?"
       },
     ])
     .then(function (answer) {
-      conecction.query("INSERT INTO SET ?, [answer", function (err) {
+      connection.query("INSERT INTO role SET ?", [answer], function (err) {
         if (err) throw (err);
         console.log("Complete!");
         start();
@@ -174,13 +178,13 @@ function addRole() {
 // View department, employee and role
 
 function viewEmployee() {
-  conecction.query("SELECT employeerole.title, employeerole.salary, department")
+  connection.query("SELECT employeerole.title, employeerole.salary, department")
 }
 
 
 // update employee
 function updateEmployee() {
-  conecction.query("SELECT * FROM employee", function (err, res) {
+  connection.query("SELECT * FROM employee", function (err, res) {
     console.log(res);
     const employees = res.map(element => {
       return (
@@ -203,7 +207,7 @@ function updateEmployee() {
           }
         )
       })
-      console.log(employeeRroles);
+      console.log(employeeRoles);
 
       inquirer.prompt([
         {
@@ -218,7 +222,7 @@ function updateEmployee() {
         }
       ]).then(answers => {
         console.log(answers)
-        conecction.query("UPDATE employee SET role_id = ? WHERE id = ?", [answers.employee, answers.role],
+        connection.query("UPDATE employee SET role_id = ? WHERE id = ?", [answers.employee, answers.role],
           function (err, res) {
             if (err) throw (err);
             console.log(res.affectedRows + "Your employee has been updated!\n");
