@@ -256,14 +256,56 @@ function updateEmployee() {
 // Begin deletion of roles, employees and departments
 function removeEmployee() {
   inquirer.prompt([
-    {
-      type: "input",
-      name: "role",
-      message: "Please enter employee role ID"
-    }
+      {
+          type: "number",
+          name: "id",
+          message: "Enter employee ID"
+      }
   ]).then(answers => {
-    connection.query("DELETE FROM WHERE ?", {
-      id: answers.id
-    })
-  })
-}
+      connection.query("DELETE FROM employee WHERE ?", {
+          id: answers.id
+      },
+          function (err, res) {
+              if (err) throw err;
+              console.log(res.affectedRows + "Employee has been deleted!\n");
+              start();
+          });
+  });
+};
+
+function removeRole() {
+  inquirer.prompt([
+      {
+          type: "number",
+          name: "id",
+          message: "Enter role ID"
+      }
+  ]).then(answers => {
+      connection.query("DELETE FROM role WHERE ?", {
+          id: answers.id
+      },
+          function (err, res) {
+              if (err) throw err;
+              console.log(res.affectedRows + "This role has been deleted!\n");
+              start();
+          });
+  });
+};
+function removeDepartment() {
+  inquirer.prompt([
+      {
+          type: "number",
+          name: "id",
+          message: "Enter department ID"
+      }
+  ]).then(answers => {
+      connection.query("DELETE FROM department WHERE ?", {
+          id: answers.id
+      },
+          function (err, res) {
+              if (err) throw err;
+              console.log(res.affectedRows + "This department has been removed!\n");
+              start();
+          });
+  });
+};
