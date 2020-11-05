@@ -178,7 +178,27 @@ function addRole() {
 // View department, employee and role
 
 function viewEmployee() {
-  connection.query("SELECT employeerole.title, employeerole.salary, department")
+  connection.query("SELECT employee.first_name, employee.last_name, role.title, role.salary, department.name", function (err, res) {
+  if (err) throw (err);
+  console.table(res);
+  start();
+  });
+};
+
+function viewRole() {
+  connection.query("SELECT role.title, role.salary, department.name FROM role LEFT JOIN department ON role.department_id;", function (err, res) {
+    if (err) throw (err);
+    console.table(res);
+    start();
+  });
+};
+
+function viewDepartment() {
+  connection.query("SELECT * FROM department", function (err, res) {
+    if (err) throw (err);
+    console.table(res);
+    start();
+  })
 }
 
 
