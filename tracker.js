@@ -202,7 +202,7 @@ function viewDepartment() {
 }
 
 
-// update employee
+// This function updates the employee by prompting the user to awnser a few questions
 function updateEmployee() {
   connection.query("SELECT * FROM employee", function (err, res) {
     console.log(res);
@@ -272,7 +272,7 @@ function removeEmployee() {
           });
   });
 };
-
+// The role is taken and removed from the database
 function removeRole() {
   inquirer.prompt([
       {
@@ -291,6 +291,7 @@ function removeRole() {
           });
   });
 };
+// The department is removed from the database
 function removeDepartment() {
   inquirer.prompt([
       {
