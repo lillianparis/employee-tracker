@@ -122,7 +122,7 @@ function addEmployee() {
       console.log(answer)
       connection.query("INSERT INTO employee SET ?", [answer], function (err) {
         if (err) throw (err);
-        console.log("Complete!");
+        console.log("Employee has been added!");
         start();
       })
     })
@@ -141,7 +141,7 @@ function addDepartment() {
     .then(function (answer) {
       connection.query("INSERT INTO department SET ?", [answer], function (err) {
         if (err) throw (err);
-        console.log("It's been added!")
+        console.log("Department has been added!")
         start();
       });
     });
@@ -169,7 +169,7 @@ function addRole() {
     .then(function (answer) {
       connection.query("INSERT INTO role SET ?", [answer], function (err) {
         if (err) throw (err);
-        console.log("Complete!");
+        console.log("Role has been added");
         start();
       })
     })
