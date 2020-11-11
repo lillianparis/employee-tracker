@@ -109,12 +109,12 @@ function addEmployee() {
       {
         name: "role_id",
         type: "input",
-        message: "What is the employee's role"
+        message: "What is the employee's role id?"
       },
       {
         name: "manager_id",
         type: "input",
-        message: "What is the employee's manager Id"
+        message: "What is the employee's manager Id?"
       },
     ])
     // Adds to mysql by placing the information into a table with rows and columns
@@ -178,7 +178,7 @@ function addRole() {
 // View department, employee and role
 
 function viewEmployee() {
-  connection.query("SELECT employee.first_name, employee.last_name, role.title, role.salary, department.name", function (err, res) {
+  connection.query("SELECT employee.first_name, employee.last_name, role.title, role.salary, department.name FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id", function (err, res) {
   if (err) throw (err);
   console.table(res);
   start();
@@ -242,7 +242,7 @@ function updateEmployee() {
         }
       ]).then(answers => {
         console.log(answers)
-        connection.query("UPDATE employee SET role_id = ? WHERE id = ?", [answers.employee, answers.role],
+        connection.query("UPDATE employee SET role = ? WHERE id = ?", [answers.employee, answers.role],
           function (err, res) {
             if (err) throw (err);
             console.log(res.affectedRows + "Your employee has been updated!\n");

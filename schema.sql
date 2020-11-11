@@ -42,27 +42,19 @@ CREATE TABLE employee(
    id INT NOT NULL AUTO_INCREMENT,
   first_name VARCHAR(30),
   last_name VARCHAR(30),
-  role_id INT ,
+  role_id INT,
   manager_id INT ,
 	PRIMARY KEY (id)
 );
 
--- SELECT employee.first_name, employee.last_name, role.title, role.salary, role.department_id, department.name, manager.first_name AS manager_firstname, manager.last_name AS manager_lastname FROM employee
--- LEFT JOIN role
--- ON employee.role = role.id
--- LEFT JOIN department
--- ON role.department_id = department.id;
-
--- SELECT role.title, role.salary, department.name FROM role
--- LEFT JOIN department
--- ON role.department_id = department.id;
 
 
--- INSERT INTO departments (name)
--- VALUES("Military"),("Finance"),("Customer Service");
 
--- Insert INTO role (title, salary, department_id)
--- VALUES ("Airforce", 67000, 2),("Accountant", 110000, 3),("Sales Representative", 80000, 1);
+INSERT INTO department (name)
+VALUES("Military"),("Finance"),("Customer Service");
 
--- INSERT INTO employee (first_name, last_name, role_id, manager_id)
--- VALUES ("Lillian", "Paris", 2, 2), ("Max","Hernandez", 4, null), ("Newbie", "Feather", 2);
+Insert INTO role (title, salary, department_id)
+VALUES ("Airforce", 67000, 2),("Accountant", 110000, 3),("Sales Representative", 80000, 1);
+
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ("Lillian", "Paris", 2, 2), ("Max","Hernandez", 4, null), ("Newbie", "Feather", 2, 6);
